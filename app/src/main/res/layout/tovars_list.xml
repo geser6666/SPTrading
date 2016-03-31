@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" android:layout_width="fill_parent"
+	android:id="@+id/linearLayout1" android:orientation="vertical">
+	<LinearLayout android:layout_width="match_parent"
+		android:id="@+id/ll_filter" android:layout_height="wrap_content" android:visibility="visible">
+		<TextView android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:id="@+id/textView1"
+			android:text="@string/OTBOR"></TextView>
+		<Spinner android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:id="@+id/grtovar_filter"></Spinner>
+	</LinearLayout>
+	<ListView android:id="@android:id/list"	android:layout_width="fill_parent"
+	android:layout_weight="1" android:layout_height="wrap_content" 
+		android:scrollbarStyle="insideInset" android:fastScrollEnabled="true"
+		android:textFilterEnabled="true"
+		></ListView>
+		
+	<LinearLayout android:layout_height="wrap_content"
+		android:layout_width="match_parent" android:id="@+id/linearLayout3"
+		android:orientation="horizontal">
+		<ToggleButton android:id="@+id/tbTovOnlyOst" android:text="ToggleButton"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:textOn="Все" android:textOff="Ост" ></ToggleButton>
+	</LinearLayout>
+</LinearLayout>

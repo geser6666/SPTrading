@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
+        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="match_parent">
+            <TextView android:layout_height="wrap_content" android:text="TextView" android:id="@+id/partnername" android:layout_width="wrap_content" android:textSize="22px"></TextView>
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+            <TextView android:layout_height="wrap_content" android:text="@string/NUMB" android:id="@+id/textView1" android:layout_width="wrap_content"></TextView>
+            <RelativeLayout android:layout_height="match_parent" android:id="@+id/relativeLayout1" android:layout_width="10px"></RelativeLayout>
+            <TextView android:layout_height="wrap_content" android:text="TextView" android:id="@+id/numorder" android:layout_width="wrap_content" android:textSize="16px"></TextView>
+            <RelativeLayout android:layout_width="10px" android:layout_height="match_parent" android:id="@+id/RelativeLayout01">
+            </RelativeLayout>
+            <TextView android:layout_height="wrap_content" android:text="@string/OT" android:id="@+id/textView2" android:layout_width="wrap_content"></TextView>
+            <RelativeLayout android:layout_height="match_parent" android:layout_width="10px" android:id="@+id/RelativeLayout02"></RelativeLayout>
+            <TextView android:layout_height="wrap_content" android:text="TextView" android:id="@+id/orderdate" android:layout_width="wrap_content" android:textSize="16px"></TextView>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout3" android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content" android:id="@+id/textView3" android:text="@string/SUM" android:layout_height="wrap_content"></TextView>
+            <TextView android:layout_width="wrap_content" android:id="@+id/ordersum" android:text="TextView" android:layout_height="wrap_content" android:textSize="22px"></TextView>
+            <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="wrap_content" android:paddingLeft="50px" android:id="@+id/order_central_id"></TextView>
+        </LinearLayout>
+        
+    </LinearLayout>

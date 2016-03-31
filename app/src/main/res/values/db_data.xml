@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+<string-array name="ddl_cc_data" >
+<item>delete from props</item>
+<item>delete from paytypes</item>
+<item>
+insert into props(_id, name) values(1,\"ДТР\")
+</item>
+<item>
+insert into paytypes(_id, name) values(1, \"Безнал\");
+</item>
+<item>
+insert into paytypes(_id, name) values(2, \"Нал\");
+</item>
+
+
+<item> delete from cc_tovari</item>
+<item> delete from cc_card</item>
+<item> delete from clientcard</item>
+<item>INSERT INTO clientcard (_id, name) VALUES (1, \"Henkel\");</item>
+<item>INSERT INTO CC_CARD (_id, dt, client_id, card_id) VALUES (1, \"2011-06-02\", 5645, 1);</item>
+<item>INSERT INTO CC_CARD (_id, dt, client_id, card_id) VALUES (2, \"2011-06-05\", 5645, 1);</item>
+<item>INSERT INTO CC_TOVARI (_id, card_id, tovar_id, cat_a, cat_b, cat_c) VALUES (11, 1, 5307, 1, 1, 1)</item>
+<item>INSERT INTO CC_TOVARI (_id, card_id, tovar_id, cat_a, cat_b, cat_c) VALUES (12, 1, 5308, 1, 1, 0)</item>
+<item>INSERT INTO CC_TOVARI (_id, card_id, tovar_id, cat_a, cat_b, cat_c) VALUES (13, 1, 5345, 1, 0, 0)</item>
+<item>INSERT INTO CC_DATA(position_id, ost,card_id,zakaz) VALUES(11, 5, 1,0)</item>
+<item>INSERT INTO CC_DATA(position_id, ost,card_id,zakaz) VALUES(12, 5, 1,0)</item>
+
+
+</string-array>
+</resources>

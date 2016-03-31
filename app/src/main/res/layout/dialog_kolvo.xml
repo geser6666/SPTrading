@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" android:layout_width="fill_parent"
+	android:id="@+id/linearLayout1" android:orientation="vertical">
+    <LinearLayout android:id="@+id/linearLayout5" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="20dip" android:paddingRight="20dip">
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout2" android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content" android:text="Кол-во" android:layout_height="wrap_content" android:textSize="25sp" android:id="@+id/textView1" android:layout_weight="1"></TextView>
+            <EditText android:layout_width="wrap_content" android:id="@+id/dlgKolvo_kolvo" android:layout_height="wrap_content" android:textSize="20sp" android:text="EditText" android:minWidth="@dimen/qty_kolvo_cena_width" android:layout_weight="1"></EditText>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout3" android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content" android:text="Цена" android:layout_height="wrap_content" android:textSize="25sp" android:id="@+id/textView2" android:layout_weight="1"></TextView>
+            <EditText android:layout_width="wrap_content" android:id="@+id/dlgKolvo_cena" android:layout_height="wrap_content" android:textSize="20sp" android:text="EditText" android:minWidth="@dimen/qty_kolvo_cena_width" android:layout_weight="1"></EditText>
+        </LinearLayout>
+    </LinearLayout>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_height="fill_parent" android:layout_width="fill_parent"
+		android:orientation="vertical" android:padding="10dip">
+		<LinearLayout android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:orientation="horizontal">
+		</LinearLayout>
+		<LinearLayout android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:orientation="horizontal">
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="1" android:id="@+id/btQty1" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="2" android:id="@+id/btQty2" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="3" android:id="@+id/btQty3" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="4" android:id="@+id/btQty4" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:text="5" android:layout_width="wrap_content" android:layout_weight="1" android:minWidth="@dimen/qty_button_width" android:layout_height="wrap_content" android:textSize="25sp" android:textStyle="bold" android:id="@+id/btQty5"></Button>
+		</LinearLayout>
+		<LinearLayout android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:orientation="horizontal">
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="6" android:id="@+id/btQty6" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="7" android:id="@+id/btQty7" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="8" android:id="@+id/btQty8" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="9" android:id="@+id/btQty9" android:textStyle="bold"
+				android:textSize="25sp" android:minWidth="@dimen/qty_button_width"/>
+			<Button android:text="0" android:layout_width="wrap_content" android:layout_weight="1" android:minWidth="@dimen/qty_button_width" android:layout_height="wrap_content" android:textSize="25sp" android:textStyle="bold" android:id="@+id/btQty0"></Button>
+		</LinearLayout>
+		<LinearLayout android:layout_height="wrap_content"
+			android:layout_width="fill_parent" android:orientation="horizontal">
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="." android:id="@+id/btQtyPoint" android:textStyle="bold"
+				android:textSize="25sp" />
+			<Button android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:layout_weight="1"
+				android:text="C" android:textColor="#ff0000" android:textStyle="bold"
+				android:id="@+id/btQtyC" android:textSize="25sp" />
+			<Button android:layout_width="wrap_content" android:textStyle="bold"
+				android:text="&lt;" android:textSize="25dip" 
+				android:layout_height="wrap_content" android:layout_weight="1"
+				android:id="@+id/btBackspace">
+			</Button>
+		</LinearLayout>
+		<LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/linearLayout6"></LinearLayout>
+		<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/linearLayout4">
+			<Button android:text="Ok" android:layout_width="wrap_content" android:layout_weight="1" android:minWidth="120dip" android:layout_height="wrap_content" android:textSize="25sp" android:textStyle="bold" android:id="@+id/dlgKolvo_btnOk"></Button>
+			<Button android:text="Cancel" android:layout_width="wrap_content" android:layout_weight="1" android:minWidth="120dip" android:layout_height="wrap_content" android:textSize="25sp" android:textStyle="bold" android:id="@+id/dlgKolvo_btnCancel"></Button>
+		</LinearLayout>
+	</LinearLayout>
+
+
+
+</LinearLayout>

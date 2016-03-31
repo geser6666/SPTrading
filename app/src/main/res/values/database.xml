@@ -1,0 +1,240 @@
+<resources>
+<string-array name="ddl_of_database">
+
+<item>
+CREATE TABLE "params" (
+  "_id" INTEGER NOT NULL PRIMARY KEY, 
+  "workdate" DATE,
+  "agentid" INTEGER,
+  "agentname" VARCHAR(20));
+</item>
+
+<item>
+CREATE TABLE "partner" ( 
+_id INTEGER NOT NULL PRIMARY KEY, 
+name VARCHAR(100), 
+address VARCHAR(100), 
+phone VARCHAR(50), 
+daysdelay SMALLINT, 
+debtsumm1 DOUBLE, 
+idskidka int, 
+cat VARCHAR(10) , 
+idhenkel integer,
+week_day integer,
+upd integer);  
+</item>
+
+<item>
+CREATE TABLE "props" (
+  "_id" INTEGER NOT NULL PRIMARY KEY, 
+  "name" VARCHAR(20));
+</item>
+
+
+<item>
+CREATE TABLE "sklad" (
+  "_id" INTEGER NOT NULL PRIMARY KEY,
+  "parentid" INTEGER CONSTRAINT "fk_grsklad" REFERENCES "grsklad"("_id"),
+  "name" VARCHAR(100), 
+  "ed_izm" VARCHAR(10),
+  "cenands" DOUBLE,
+  "available" DOUBLE,
+  "ost" DOUBLE,
+  "idproperty" INTEGER CONSTRAINT "fk_props" REFERENCES "props"("_id"),
+  "skidka1" DOUBLE,
+  "skidka2" DOUBLE,
+  "skidka3" DOUBLE,
+  "seb" DOUBLE
+   );
+</item>
+
+<item>
+CREATE TABLE "grsklad" (
+  "_id" INTEGER NOT NULL PRIMARY KEY,
+  "name" VARCHAR(100));
+</item>
+
+<item>
+CREATE TABLE "doctypes" (
+"_id" INTEGER NOT NULL PRIMARY KEY ,
+"name" VARCHAR(10)
+);
+</item>
+
+<item>
+CREATE TABLE "paytypes" (
+"_id" INTEGER NOT NULL PRIMARY KEY ,
+"name" VARCHAR(10)
+);
+</item>
+
+<item>
+CREATE TABLE "orders" (
+  "_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+  "clientid" INTEGER CONSTRAINT "fk_partner" REFERENCES "partner"("_id") on delete cascade on update cascade, 
+  "clientname" VARCHAR(100),  
+  "docdate" DATE DEFAULT (CURRENT_DATE), 
+  "doctime" TIME DEFAULT (CURRENT_TIME), 
+  "itemcount" DOUBLE, 
+  "mainsumm" DOUBLE, 
+  "paymentdate" DATE, 
+  "typepay" INTEGER CONSTRAINT "fk_paytypes" REFERENCES "paytypes"("_id") DEFAULT 2, 
+  "central_id" INTEGER,
+  "property" INTEGER,
+  "prim" varchar(50),
+  "typedoc" INTEGER );
+</item>
+
+
+<item>
+CREATE TABLE "torders" ( 
+_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+grid INTEGER NOT NULL CONSTRAINT fk_orders REFERENCES orders(_id) on delete cascade on update cascade, 
+tovid INTEGER NOT NULL CONSTRAINT fk_sklad REFERENCES sklad(_id), 
+tovname VARCHAR(100), 
+ed_izm VARCHAR(10), 
+kolvo DOUBLE NOT NULL, 
+cena DOUBLE, 
+cenaprice DOUBLE);
+</item>
+
+<item>
+CREATE TRIGGER bd_orders BEFORE DELETE ON orders 
+BEGIN 
+select case when old.central_id>0 then RAISE (ABORT, \"NOT DELETE!!!\") end; 
+delete from torders where grid = old._id; END
+</item>
+<item>
+CREATE TRIGGER "ai_torders" 
+AFTER INSERT 
+ON TORDERS 
+BEGIN 
+update torders set cenaprice=(select cenands from sklad where _id=new.tovid ) where _id=new._id;  
+END
+</item>
+<item>drop trigger if exists ai_orders</item>
+<item>drop trigger if exists ai_torders_ei</item>
+<item>drop trigger if exists ai_torders_nt</item>
+<item>
+CREATE TRIGGER ai_orders after INSERT ON ORDERS when new.clientname is null 
+BEGIN 
+update ORDERS 
+set clientname= (select name from partner where _id=new.clientid)
+where _id=new._id;
+END
+</item>
+<item>
+CREATE TRIGGER ai_torders_ei after INSERT ON tORDERS when new.ed_izm is null 
+BEGIN 
+update TORDERS 
+set ed_izm= (select ed_izm from sklad where _id=new.tovid)
+where _id=new._id;
+END
+</item>
+<item>
+CREATE TRIGGER ai_torders_nt after INSERT ON tORDERS when new.tovname is null 
+BEGIN 
+update TORDERS 
+set tovname= (select name from sklad where _id=new.tovid)
+where _id=new._id;
+END
+</item>
+
+
+<item>delete from props</item>
+<item>delete from paytypes</item>
+<item>
+insert into props(_id, name) values(2,\"ЛЭА\")
+</item>
+<item>
+insert into paytypes(_id, name) values(1, \"Безнал\");
+</item>
+<item>
+insert into paytypes(_id, name) values(2, \"Нал\");
+</item>
+
+</string-array>
+
+<string-array name="ddl_of_cc">
+<item>
+delete from cc_data;
+</item>
+<item>
+delete from cc_card;
+</item>
+
+<item>
+drop table "clientcard";
+</item>
+<item>
+drop table "cc_tovari";
+</item>
+<item>
+drop table "cc_card";
+</item>
+<item>
+drop table "cc_data";
+</item>
+
+<item>
+CREATE TABLE "clientcard" (
+"_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+"name" VARCHAR(50)
+);
+</item>
+<item>
+CREATE TABLE "cc_tovari" (
+"_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
+"card_id" INTEGER NOT NULL CONSTRAINT "fk_clientcard_cc_tovari" REFERENCES "clientcard"("_id") on delete cascade on update cascade,
+"tovar_id" INTEGER NOT NULL CONSTRAINT "fk_sklad_cc_tovari" REFERENCES "sklad"("_id"),
+"cat_a" VARCHAR(1),
+"cat_b" VARCHAR(1),
+"cat_c" VARCHAR(1),
+"CAT_DHM" VARCHAR(1),
+"CAT_DAB" VARCHAR(1),
+"CAT_DAC" VARCHAR(1),
+"CAT_DM" VARCHAR(1),
+"CAT_DC" VARCHAR(1),
+"CAT_DOP" VARCHAR(1),
+"CAT_DO" VARCHAR(1),
+"CAT_DPL" VARCHAR(1),
+"CAT_DSF" VARCHAR(1),
+"CAT_DP" VARCHAR(1),
+"CAT_DL" VARCHAR(1),
+"CAT_DFD" VARCHAR(1),
+"CAT_DDS" VARCHAR(1),
+"CAT_DPR" VARCHAR(1),
+"CAT_DSTT" VARCHAR(1),
+"CAT_DAUTO" VARCHAR(1),
+"CAT_DGARDEN" VARCHAR(1),
+"CAT_DFISH" VARCHAR(1),
+"CAT_DFOOD" VARCHAR(1)
+
+
+);
+</item>
+<item>
+CREATE TABLE "cc_card" (
+    "_id"         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "dt"         DATE DEFAULT (CURRENT_DATE),
+    "client_id"  INTEGER  NOT NULL CONSTRAINT "fk_partner_cc_card" REFERENCES "partner"("_id") on delete cascade on update cascade,
+    "card_id"    INTEGER NOT NULL CONSTRAINT "fk_clientcard_cc_card" REFERENCES "clientcard"("_id") on delete cascade on update cascade,
+    "central_id"    INTEGER,
+    "prim" 		VARCHAR(100)
+     
+);
+</item>
+<item>
+
+CREATE TABLE "cc_data" (
+    "_id"        INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "position_id"  INTEGER NOT NULL CONSTRAINT "fk_cc_tovari_cc_data" REFERENCES "cc_tovari"("_id") on update cascade,
+    "ost"          DOUBLE,
+    "card_id"      INTEGER NOT NULL CONSTRAINT "fk_cc_card_cc_data" REFERENCES "cc_card"("_id") on delete cascade on update cascade,
+    "zakaz"        DOUBLE
+);
+CREATE UNIQUE INDEX cc_data_pos_card ON cc_data(position_id,card_id)
+</item>
+</string-array>
+
+</resources>

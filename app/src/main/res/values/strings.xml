@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DTRTrading</string>
+	<string-array name="itemMain">
+		<item>Заявка</item>
+		<item>Продажа</item>
+		<item>Инвентаризация</item>
+		<item>Карта клиента</item>
+		<item>Справочники</item>
+		<item>Журнал </item>
+		<item>Обмен данными</item>
+		<item>Настройка</item>
+		<item>Выход</item>
+	</string-array>
+	<string-array name="itemReference">
+		<item>Партнеры</item>
+		<item>Склад</item>
+	</string-array>
+	<string-array name="itemCCReference">
+		<item>Новая карточка</item>
+		<item>Журнал</item>
+		<item>КК за день</item>
+	</string-array>
+	<string-array name="itemSettings">
+		<item>Настройка сервера</item>
+		<item>Выбор сервера</item>
+	</string-array>
+	
+	
+<string-array name="itemSync">
+		<item>Все</item>
+		<item>Отправить заявки</item>
+		<item>Получить документы</item>
+		<item>Получить партнеров</item>
+		<item>Получить товары</item>
+		<item>Шаблоны карт клиентов</item>
+		<item>Карты клиентов</item>
+	</string-array>	
+<string name="ZAKAZN">Заказ №</string>
+<string name="ZAKAZ_DATE">Дата:</string>
+<string name="ZAKAZ_FIRMA">Фирма:</string>
+<string name="ZAKAZ_CLIENT">Клиент:</string>
+<string name="ZAKAZ_SUMMA">Сумма с НДС:</string>
+<string name="msg_NoOrd">Нет заявок</string>
+<string name="NUMB">№</string>
+<string name="OT"> от </string>
+<string name="SUM">    Сумма:  </string>
+<string name="OTBOR">Отбор:</string>
+<string name="btn_ok">OK</string>   
+<string name="btn_cancel">Cancel</string>
+
+
+
+<string name="prim">Примечание</string>
+
+<string name="run_task">Run</string>
+<string name="task_working">Working (%1$d)...</string>
+<string name="task_starting">Starting...</string>
+<string name="task_cancelled">Task is cancelled by user</string>
+<string name="task_completed">Task is completed with result (%1$s)</string>
+
+
+ <string name="search_hint">Search the records</string>
+  <string name="search">Search</string>
+  <string name="DATA">Дата</string>
+  <string name="CC_NAME">Карта клиента</string>
+  <string name="PARTNER">Партнер</string>
+  <string name="TOVAR">Товар</string>
+  <string name="OST">Остаток</string>
+  <string name="ZAKAZ">Заказ</string>
+  <string name="avail">Присутствие</string>
+  <string name="SEND">Отправить</string>
+  <string name="MANAGER_ID">Код агента</string>
+  <string name="SURNAME">Фамилия</string>
+  <string name="points">...</string>
+  <string name="OPEN">Open</string>
+  <string name="FILTER">Filter</string>
+  <string name="DEL">Delete</string>
+  <string name="serv">Сервер</string>
+  <string name="serv_address">Адрес</string>
+  <string name="SKIDKA">Скидка:</string>
+	<string name="action_settings">action_settings</string>
+
+	<string-array name="itemSkidki">
+	    <item>Прайс</item>
+		<item>Скидка1</item>
+		<item>Скидка2</item>
+	</string-array>
+    <string name="title_activity_testmenu">TestmenuActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_test">TestActivity</string>
+	<string name="settings_selectserver_text">Выберите сервер</string>
+    <string name="title_activity_partner_card">Карточка клиента</string>
+</resources>
