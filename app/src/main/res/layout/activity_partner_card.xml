@@ -8,7 +8,7 @@
 
     <TextView android:text="@string/PARTNER" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/" />
+ />
 
     <TextView
         android:layout_width="match_parent"
@@ -16,7 +16,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="tvPartnerName"
         android:id="@+id/tvPartnerName"
-        android:layout_below="@+id/"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:autoText="false"
