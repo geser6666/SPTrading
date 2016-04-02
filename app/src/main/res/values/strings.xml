@@ -86,10 +86,8 @@
 		<item>Скидка1</item>
 		<item>Скидка2</item>
 	</string-array>
-    <string name="title_activity_testmenu">TestmenuActivity</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_test">TestActivity</string>
 	<string name="settings_selectserver_text">Выберите сервер</string>
     <string name="title_activity_partner_card">Карточка клиента</string>
+	<string name="PHONE">Телефон</string>
 </resources>

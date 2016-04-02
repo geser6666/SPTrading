@@ -73,4 +73,27 @@ private DB dba;
      }	
 	
 	}
+
+	public Partner getPartner(int partnerId) {
+		Partner prtnr;
+		Cursor curPartner=DB.getDB(context).query(Const.TABLE_PARTNERS,null, "_id="+String.valueOf(partnerId),null,null,null,null);
+		curPartner.moveToFirst();
+		prtnr=new Partner(curPartner.getInt(curPartner.getColumnIndex("_id")),
+				curPartner.getString(curPartner.getColumnIndex("name")),
+				curPartner.getString(curPartner.getColumnIndex("address")),
+				curPartner.getString(curPartner.getColumnIndex("phone")),
+				curPartner.getInt(curPartner.getColumnIndex("daysdelay")),
+				curPartner.getDouble(curPartner.getColumnIndex("debtsumm1")),
+				curPartner.getInt(curPartner.getColumnIndex("idskidka")),
+				curPartner.getString(curPartner.getColumnIndex("cat")),
+				curPartner.getString(curPartner.getColumnIndex("idhenkel")),
+				curPartner.getInt(curPartner.getColumnIndex("week_day"))
+						);
+
+		curPartner.close();
+
+
+		return prtnr;
+
+	}
 }

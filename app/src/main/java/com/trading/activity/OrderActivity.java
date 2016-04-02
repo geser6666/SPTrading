@@ -176,6 +176,7 @@ public class OrderActivity extends TabActivity {
 				
 				intent.putExtra("_ID", 0);
 				intent.putExtra("week_day", Calendar.getInstance().getTime().getDay());
+				intent.putExtra("selectmode", true);
 				intent.setClass(OrderActivity.this, PartnersListActivity.class);
 				causedactivity = 1;
 				startActivityForResult(intent, 0);
@@ -236,7 +237,7 @@ public class OrderActivity extends TabActivity {
 			public void onClick(View v) {
 				if (ordr.getCentral_id() > 0)
 					Toast.makeText(OrderActivity.this,
-							"Не могу повторно отправить!!!", 10000).show();
+							"Не могу повторно отправить!!!", Toast.LENGTH_SHORT).show();
 				else
 					//SendOrder();
 				new SendOrderTask().execute();
@@ -339,7 +340,7 @@ public class OrderActivity extends TabActivity {
 				}
 			}
 			 catch (Exception e) {
-				Toast.makeText(OrderActivity.this, e.getMessage(), 10000).show();
+				Toast.makeText(OrderActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 			return null;
 		}
@@ -437,7 +438,7 @@ public class OrderActivity extends TabActivity {
 
 			}
 		} catch (Exception e) {
-			Toast.makeText(OrderActivity.this, e.getMessage(), 10000).show();
+			Toast.makeText(OrderActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -545,7 +546,7 @@ public class OrderActivity extends TabActivity {
 	private void SaveClick2(final boolean sendaftersave) {
 		if (ordr.getCentral_id() > 0) {
 			Toast.makeText(OrderActivity.this,
-					"Не могу сохранить закрытый документ!", 10000).show();
+					"Не могу сохранить закрытый документ!", Toast.LENGTH_SHORT).show();
 
 			finish();
 		}
@@ -678,7 +679,7 @@ public class OrderActivity extends TabActivity {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		Toast.makeText(OrderActivity.this, "stop", 10000);
+		Toast.makeText(OrderActivity.this, "stop", Toast.LENGTH_SHORT).show();
 
 	}
 
@@ -686,7 +687,7 @@ public class OrderActivity extends TabActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		Toast.makeText(OrderActivity.this, "pause", 10000);
+		Toast.makeText(OrderActivity.this, "pause", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -762,7 +763,7 @@ public class OrderActivity extends TabActivity {
 			 * 40;
 			 */
 		} catch (Exception e) {
-			Toast.makeText(this, e.getMessage(), 10000);
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 	}
 

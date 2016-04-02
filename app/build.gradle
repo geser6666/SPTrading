@@ -8,8 +8,8 @@ android {
         applicationId "com.trading"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.1"
+        versionCode 12
+        versionName "1.2"
     }
     buildTypes {
         release {

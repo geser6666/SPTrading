@@ -19,6 +19,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.FilterQueryProvider;
@@ -31,6 +32,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.trading.R;
 import com.trading.adapters.PartnersAdapter;
 import com.trading.adapters.PartnersAdapter2;
+import com.trading.utils.ClientCard;
 import com.trading.utils.Partner;
 
 public class PartnersListActivity extends ListActivity implements FilterQueryProvider{
@@ -40,12 +42,13 @@ public class PartnersListActivity extends ListActivity implements FilterQueryPro
 	private PartnersAdapter2 myAdapter = null;
 	private String notemptyfield="";
 	private int week_day=0;
+
+	private boolean selectmode=false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-
 		try {
-
 			setContentView(R.layout.partners_list);
 			super.onCreate(savedInstanceState);
 			tb_mar=(ToggleButton)findViewById(R.id.tb_mar);
@@ -61,8 +64,6 @@ public class PartnersListActivity extends ListActivity implements FilterQueryPro
 								PartnersAdapter2.getdata(PartnersListActivity.this, "",notemptyfield, 0));
 			        
 					PartnersListActivity.this.setListAdapter(myAdapter);
-					
-					
 				}
 			});
 /*
@@ -75,17 +76,13 @@ public class PartnersListActivity extends ListActivity implements FilterQueryPro
 			      myAdapter = new PartnersAdapter(this,query);
 			    }else
 				      myAdapter = new PartnersAdapter(this,"");
-			    	
-
 				    this.setListAdapter(null);
 				this.setListAdapter(myAdapter);
 	*/
-			
 			//m_partners = new ArrayList<Partner>();
-			
 			Bundle extras = getIntent().getExtras();
-			
-			
+			//if (extras.getBoolean("selectmode")!=null)
+				selectmode=extras.getBoolean("selectmode");
 			tb_mar.setChecked(false);
 			if (extras!= null)
 			{
@@ -95,44 +92,42 @@ public class PartnersListActivity extends ListActivity implements FilterQueryPro
 				{
 					week_day=extras.getInt("week_day");
 					tb_mar.setChecked(true);
-					
 				}
-
-
 			}
-
 	      //  this.myAdapter = new PartnersAdapter2(this, R.layout.partner_row, PartnersAdapter2.getdata(this, "",notemptyfield, week_day));
-	        
-	      //  setListAdapter((ListAdapter) this.myAdapter);			
-			
-			
-	        
-	     
-			
+	      //  setListAdapter((ListAdapter) this.myAdapter);
 			// setContentView(R.layout.orders_list);
 		} catch (Exception e) {
-			Toast.makeText(this, e.getMessage(), 10000);
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
-
 	}
-	
-	 
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
-
-		Intent intent = new Intent();
-		intent.setAction(ACTIVITY_SERVICE);
-		intent.putExtra("_id", myAdapter.getItem(position).id);
-		intent.putExtra("name", myAdapter.getItem(position).name);
-		intent.putExtra("idskidka", myAdapter.getItem(position).idskidka);
-		intent.putExtra("cat", myAdapter.getItem(position).category);
-		setResult(RESULT_OK, intent);
-		PartnersListActivity.this.finish();
-		PartnersListActivity.this.finish();
-
+if (selectmode)
+		{
+			Intent intent = new Intent();
+			intent.setAction(ACTIVITY_SERVICE);
+			intent.putExtra("_id", myAdapter.getItem(position).id);
+			intent.putExtra("name", myAdapter.getItem(position).name);
+			intent.putExtra("idskidka", myAdapter.getItem(position).idskidka);
+			intent.putExtra("cat", myAdapter.getItem(position).category);
+			setResult(RESULT_OK, intent);
+			PartnersListActivity.this.finish();
+			PartnersListActivity.this.finish();
+		} else {
+			try {
+					Intent intent = new Intent(this, PartnerCardActivity.class);
+					intent.putExtra("_ID", myAdapter.getItem(position).id);
+					startActivity(intent);
+				} catch (Exception e) {
+					// TODO: handle exception
+					Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+				}
+		}
 	}
+
 	@Override
 	public Cursor runQuery(CharSequence sequence) {
 		// TODO Auto-generated method stub

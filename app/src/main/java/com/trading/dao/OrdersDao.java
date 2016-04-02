@@ -80,7 +80,7 @@ public class OrdersDao {
 							null);
 			curOrder.moveToFirst();
 			
-			
+
 			//or.setId(curOrder.getInt(curOrder.getColumnIndex("_id")));
 			//or.setDocdate(java.sql.Date.valueOf(curOrder.getString(curOrder.getColumnIndex("docdate"))));
 			//or.setDoctime(java.sql.Time.valueOf(curOrder.getString(curOrder.getColumnIndex("doctime"))));
@@ -159,7 +159,7 @@ public class OrdersDao {
 		
 		db.execSQL("delete from orders where _id=?", new String[]{String.valueOf(orderid)});
 		} catch (Exception e) {
-			Toast.makeText(context, e.getMessage(), 10000).show(); 
+			Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 		db.close();
 				
@@ -274,7 +274,7 @@ public class OrdersDao {
 		} catch (Exception e) {
 			db.endTransaction();
 			String s = e.getMessage();
-			Toast.makeText(context, e.getMessage()+String.valueOf(nn), 10000).show();
+			Toast.makeText(context, e.getMessage()+String.valueOf(nn), Toast.LENGTH_SHORT).show();
 			
 		} finally {
 			ordr.setIschanged(false);

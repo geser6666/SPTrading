@@ -52,6 +52,7 @@ public class ReferenceListActivity extends ListActivity {
 				intent.putExtra("_ID", 0);
 				int week_day=Calendar.getInstance().getTime().getDay();
 				intent.putExtra("week_day", 0);
+				intent.putExtra("selectmode", false);
 
 				intent.setClass(this, PartnersListActivity.class);
 				
@@ -60,7 +61,7 @@ public class ReferenceListActivity extends ListActivity {
 				startActivity(intent);	
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(),10000);
+				Toast.makeText(this, e.getMessage(),Toast.LENGTH_SHORT).show();
 			} 
 			
 			break;
@@ -70,7 +71,7 @@ public class ReferenceListActivity extends ListActivity {
 				startActivity(new Intent(this,TovarsListActivity.class));	
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(),10000);
+				Toast.makeText(this, e.getMessage(),Toast.LENGTH_SHORT).show();
 			} 
 			
 			break;

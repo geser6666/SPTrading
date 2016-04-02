@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trading"
-    android:versionCode="1"
-    android:versionName="1.1" >
+    android:versionCode="12"
+    android:versionName="1.2" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -32,14 +32,7 @@
             android:name=".activity.OrdersListActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name=".activity.NaklActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".activity.NaklListActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+
         <activity
             android:name=".activity.ReferenceListActivity"
             android:screenOrientation="portrait" >
@@ -57,10 +50,6 @@
         </activity>
         <activity
             android:name=".activity.SyncActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".activity.SyncPartnerActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -91,13 +80,14 @@
             android:name=".activity.ServersListActivity"
             android:screenOrientation="portrait" >
         </activity>
-
-        <service android:name=".services.GPSService" />
-
         <activity
             android:name=".activity.PartnerCardActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_partner_card" >
         </activity>
+        <service android:name=".services.GPSService" />
+
+
     </application>
 
 </manifest>
