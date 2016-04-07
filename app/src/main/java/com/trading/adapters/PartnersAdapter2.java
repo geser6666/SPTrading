@@ -39,6 +39,15 @@ public class PartnersAdapter2 extends ArrayAdapter<Partner> {
 	
 	}
 
+	public PartnersAdapter2(Context context, int textViewResourceId,
+							ArrayList<Partner> objects, String search) {
+		super(context, textViewResourceId, objects);
+		pd = new PartnersDao(context);
+		this.items = objects;
+		searchname=search;
+		//notifyDataSetChanged();
+
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {

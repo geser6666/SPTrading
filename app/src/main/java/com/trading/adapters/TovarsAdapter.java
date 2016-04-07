@@ -234,7 +234,7 @@ private void SetHolderVisibility(ViewHolder holder)
 
 			SetHolderVisibility(holder);
 		} catch (Exception e) {
-			Toast.makeText(null, e.getMessage(), 10000);
+			Toast.makeText(null, e.getMessage(), Toast.LENGTH_SHORT).show();
 			// TODO: handle exception
 		}
 		

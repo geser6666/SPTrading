@@ -21,7 +21,7 @@
             android:layout_width="match_parent" android:layout_weight="1"
             android:layout_height="match_parent" android:paddingTop="20px">
 
-            <LinearLayout android:orientation="vertical"
+                <LinearLayout android:orientation="vertical"
                 android:layout_height="fill_parent" android:layout_width="fill_parent"
                 android:id="@+id/tabview1">
                 <LinearLayout android:orientation="vertical"
@@ -140,24 +140,33 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_height="fill_parent" android:layout_width="fill_parent"
-                android:id="@+id/tabview2">
-                <LinearLayout android:id="@+id/linearLayout8"
-                    android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <Button android:id="@+id/sBtAddTov" android:text="+"
-                        android:layout_height="wrap_content" android:layout_width="48dp"></Button>
-                    <Spinner android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:id="@+id/sSGroupTov"></Spinner>
-                </LinearLayout>
-                <LinearLayout android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/linearLayout6">
-                    <ListView android:layout_width="match_parent" android:id="@+id/listTorder"
-                        android:layout_height="wrap_content"></ListView>
-                </LinearLayout>
-            </LinearLayout>
+                <LinearLayout android:orientation="vertical"
+                    android:layout_height="fill_parent" android:layout_width="fill_parent"
+                    android:id="@+id/tabview2">
+                    <LinearLayout android:id="@+id/linearLayout8"
+                        android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <Button android:id="@+id/sBtAddTov" android:text="+"
+                            android:layout_height="wrap_content" android:layout_width="wrap_content"
+                            android:layout_weight="1"></Button>
+                        <Spinner android:layout_width="match_parent"
+                            android:layout_height="match_parent" android:id="@+id/sSGroupTov"
+                            android:layout_weight="6"></Spinner>
 
-            <LinearLayout android:layout_height="fill_parent"
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ibOrderSearchBtn"
+                            android:src="@drawable/ic_menu_search"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/linearLayout6">
+                        <ListView android:layout_width="match_parent" android:id="@+id/listTorder"
+                            android:layout_height="wrap_content"></ListView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout android:layout_height="fill_parent"
                 android:id="@+id/tabview3" android:orientation="vertical"
                 android:layout_width="fill_parent">
                 <TextView android:text="@string/prim" android:layout_height="wrap_content"

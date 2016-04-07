@@ -160,7 +160,12 @@ public class TovarsListActivity extends ListActivity implements
 
 			// tovars = new ArrayList<TOrder>();
 
-			myAdapter = new TovarsAdapter(this, extras.getInt("lastgridtov"),
+			if (extras.get("searchQuery") != null)
+			{
+				myAdapter = new TovarsAdapter(this, extras.getInt("lastgridtov"),
+						idskidka,typeview, tbTovOnlyOst.isChecked());
+			}else
+				myAdapter = new TovarsAdapter(this, extras.getInt("lastgridtov"),
 					idskidka,typeview, tbTovOnlyOst.isChecked());
 			this.setListAdapter(myAdapter);
 			
@@ -185,7 +190,7 @@ public class TovarsListActivity extends ListActivity implements
 			
 
 		} catch (Exception e) {
-			Toast.makeText(this, e.getMessage(), 10000);
+			Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -264,7 +269,7 @@ public class TovarsListActivity extends ListActivity implements
 
 		} catch (Exception e) {
 			String s = e.getMessage();
-			Toast.makeText(TovarsListActivity.this, e.getMessage(), 10000);
+			Toast.makeText(TovarsListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 		
 

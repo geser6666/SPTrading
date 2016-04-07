@@ -19,6 +19,7 @@ import com.trading.utils.Order;
 import com.trading.utils.TOrder;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,10 +32,12 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -55,6 +58,7 @@ public class OrderActivity extends TabActivity {
 	private Spinner sSpFirma, sSPTorderFIler, sSGroupTov, sSpSkidka;
 		
 	private Button sBtZakazClient,  sBtAddTov, sBTSend;
+	private ImageButton  ibOrderSearchBtn;
 	private EditText eTZakazPrim;
 
 	private ListView lwTOrders;
@@ -71,6 +75,27 @@ public class OrderActivity extends TabActivity {
 	private TOrder selectedtovar;
 	private int lastgridtov = -1;
 
+	private String searchQuery="";
+
+	private void handleIntent(Intent intent) {
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			searchQuery = intent.getStringExtra(SearchManager.QUERY);
+			intent.setAction(Intent.ACTION_VIEW);
+			Intent newintent = new Intent();
+			intent.putExtra("searchQuery", searchQuery);
+			intent.setClass(OrderActivity.this, TovarsListActivity.class);
+			causedactivity = 2;
+			startActivityForResult(intent, 0);
+			//ApplyAdapter(tb_mar.isChecked(),0);
+		}
+		searchQuery = "";
+
+	}
+	@Override
+	protected void onNewIntent(Intent intent) {
+		setIntent(intent);
+		handleIntent(intent);
+	}
 	private class OnReadyListener implements KolvoDialog.ReadyListener {
 		@Override
 		public void ready(Double kolvo, Double cena) {
@@ -208,6 +233,15 @@ public class OrderActivity extends TabActivity {
 
 			}
 		});
+		ibOrderSearchBtn=(ImageButton)findViewById(R.id.ibOrderSearchBtn);
+		ibOrderSearchBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onSearchRequested();
+				//Toast.makeText(OrderActivity.this,"Нажат поиск",Toast.LENGTH_LONG).show();
+			}
+		});
+
 		/*---------------------tovars----------------------*/
 		lwTOrders = (ListView) findViewById(R.id.listTorder);
 		tovid = (TextView) findViewById(R.id.torder_tovid);
@@ -679,7 +713,7 @@ public class OrderActivity extends TabActivity {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		Toast.makeText(OrderActivity.this, "stop", Toast.LENGTH_SHORT).show();
+	//	Toast.makeText(OrderActivity.this, "stop", Toast.LENGTH_SHORT).show();
 
 	}
 
@@ -687,7 +721,7 @@ public class OrderActivity extends TabActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		Toast.makeText(OrderActivity.this, "pause", Toast.LENGTH_SHORT).show();
+	//	Toast.makeText(OrderActivity.this, "pause", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -695,7 +729,9 @@ public class OrderActivity extends TabActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		try {
+		//	requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.order);
+			handleIntent(getIntent());
 			Bundle extras = getIntent().getExtras();
 			OrderId = extras.getInt("_ID");
 			typedoc = extras.getInt("typedoc");
@@ -708,23 +744,23 @@ public class OrderActivity extends TabActivity {
 			prepareDataView();
 			setData();
 			// ///////////////
-			
+
 			TabHost tabs = (TabHost) findViewById(android.R.id.tabhost);
 			tabs.setup();
 			tabs.setOnTabChangedListener(new OnTabChangeListener() {
-				
+
 				@Override
 				public void onTabChanged(String tabId) {
 				if (tabId=="tag1")
 				{
 					sTVZakazsumma.setText(ordr.getMainsumm().toString());
 				}
-					
+
 				}
 			});
 
 			TabHost.TabSpec spec = tabs.newTabSpec("tag1");
-			
+
 			spec.setContent(R.id.tabview1);
 			spec.setIndicator(getResources().getText(R.string.ZAKAZ_CLIENT));
 			tabs.addTab(spec);
@@ -746,8 +782,8 @@ public class OrderActivity extends TabActivity {
 			// ///////////////
 			/*
 			 * TabHost mTabHost = this.getTabHost();
-			 * 
-			 * 
+			 *
+			 *
 			 * mTabHost.addTab(mTabHost.newTabSpec("tab_test1").setIndicator(
 			 * getResources().getText(R.string.ZAKAZ_CLIENT)).setContent(
 			 * R.id.tabview1));
