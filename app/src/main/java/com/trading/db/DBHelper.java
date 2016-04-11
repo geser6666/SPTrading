@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static  String DB_FOLDER = "/data/data/com.trading/databases/";
 	private static  String DB_PATH = DB_FOLDER + DB_NAME;
 	private static  String DB_ASSETS_PATH = "db/" + DB_NAME;
-	private static  int DB_VERSION =3 ;
+	private static  int DB_VERSION =4 ;
 	private static  int DB_FILES_COPY_BUFFER_SIZE = 8192;
 
 	public static void Initialize() {

@@ -117,7 +117,7 @@ try {
 		holder.mPartnerCat.setText(holder.mPartners.category.toString());
 		
 } catch (Exception e) {
-Toast.makeText(null, e.getMessage(), 10000).show();
+Toast.makeText(null, e.getMessage(), Toast.LENGTH_SHORT).show();
 // TODO: handle exception
 }
 

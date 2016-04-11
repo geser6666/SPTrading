@@ -58,7 +58,7 @@ public class OrderActivity extends TabActivity {
 	private TextView sTVZakaznumb, sTVZakazdate, zakazclient, tovid, tovname,
 			toved_izm, tovkolvo, sTVZakazsumma, tvTypepay;
 	private Spinner sSpFirma, sSPTorderFIler, sSGroupTov, sSpSkidka;
-		
+
 	private Button sBtZakazClient,  sBtAddTov, sBTSend;
 	private ImageButton  ibOrderSearchBtn;
 	private EditText eTZakazPrim;
@@ -108,7 +108,7 @@ public class OrderActivity extends TabActivity {
 //
 
 
-	//	handleIntent(intent);
+		//	handleIntent(intent);
 	}
 	private class OnReadyListener implements KolvoDialog.ReadyListener {
 		@Override
@@ -131,9 +131,9 @@ public class OrderActivity extends TabActivity {
 	/*
 	 * private class OnReadyConfirmListener implements
 	 * ConfirmDialog.ReadyListener {
-	 * 
+	 *
 	 * @Override public void ready(boolean yesno) {
-	 * 
+	 *
 	 * } }
 	 */
 	private void prepareDataView() {
@@ -170,7 +170,7 @@ public class OrderActivity extends TabActivity {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
+									   int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				ordr.setProperty(((SpinnerDB) sSpFirma.getSelectedItem()).id);
 			}
@@ -189,19 +189,19 @@ public class OrderActivity extends TabActivity {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
+									   int position, long arg3) {
 				// TODO Auto-generated method stub
 				ordr.setIdskidka(position);
-				
+
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		//
 		////////////////////////////////////////////////////////////
 		// /-----------------------------------------------------------------------------
@@ -212,7 +212,7 @@ public class OrderActivity extends TabActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				
+
 				intent.putExtra("_ID", 0);
 				intent.putExtra("week_day", Calendar.getInstance().getTime().getDay());
 				intent.putExtra("selectmode", true);
@@ -251,7 +251,7 @@ public class OrderActivity extends TabActivity {
 		ibOrderSearchBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-		//		onSearchRequested();
+				//		onSearchRequested();
 				//Toast.makeText(OrderActivity.this,"Нажат поиск",Toast.LENGTH_LONG).show();
 			}
 		});
@@ -267,7 +267,7 @@ public class OrderActivity extends TabActivity {
 			@SuppressWarnings("unchecked")
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
+										   int position, long arg3) {
 				// TODO Auto-generated method stub
 				TOrder temp=new TOrder();
 				temp.setId(Integer.valueOf(((java.util.HashMap) arg0.getItemAtPosition(position)).get("tovid").toString()));
@@ -276,7 +276,7 @@ public class OrderActivity extends TabActivity {
 				return true;
 			}
 		});
-		
+
 		/* отправка заявки */
 		sBTSend = (Button) findViewById(R.id.sBTSend);
 		sBTSend.setOnClickListener(new OnClickListener() {
@@ -288,7 +288,7 @@ public class OrderActivity extends TabActivity {
 							"Не могу повторно отправить!!!", Toast.LENGTH_SHORT).show();
 				else
 					//SendOrder();
-				new SendOrderTask().execute();
+					new SendOrderTask().execute();
 			}
 		});
 		/* ------------------------------- */
@@ -299,13 +299,13 @@ public class OrderActivity extends TabActivity {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+									  int count) {
 				// TODO Auto-generated method stub
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
+										  int after) {
 				// TODO Auto-generated method stub
 			}
 
@@ -346,7 +346,7 @@ public class OrderActivity extends TabActivity {
 
 		@Override
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
+								   long arg3) {
 			if (lastgridtov!=-1)
 			{
 				Intent intent = new Intent();
@@ -359,9 +359,9 @@ public class OrderActivity extends TabActivity {
 				intent.setClass(OrderActivity.this, TovarsListActivity.class);
 				causedactivity = 2;
 				startActivityForResult(intent, 0);
-			}	
-				lastgridtov = ((SpinnerDB) sSGroupTov.getSelectedItem()).id;
-			
+			}
+			lastgridtov = ((SpinnerDB) sSGroupTov.getSelectedItem()).id;
+
 
 		}
 
@@ -387,7 +387,7 @@ public class OrderActivity extends TabActivity {
 
 				}
 			}
-			 catch (Exception e) {
+			catch (Exception e) {
 				Toast.makeText(OrderActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 			return null;
@@ -396,7 +396,7 @@ public class OrderActivity extends TabActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			 dbitem = new DBInteraction(ParamsDao.getAgentId(OrderActivity.this), ordr.getProperty(), OrderActivity.this);
+			dbitem = new DBInteraction(ParamsDao.getAgentId(OrderActivity.this), ordr.getProperty(), OrderActivity.this);
 			//Toast.makeText(OrderActivity.this,"Begin",Toast.LENGTH_SHORT).show();
 		}
 
@@ -437,7 +437,7 @@ public class OrderActivity extends TabActivity {
 						break;
 				}
 			}
-		//	Toast.makeText(OrderActivity.this,"End",Toast.LENGTH_SHORT).show();
+			//	Toast.makeText(OrderActivity.this,"End",Toast.LENGTH_SHORT).show();
 		}
 	}
 	private void SendOrder()  {
@@ -451,34 +451,34 @@ public class OrderActivity extends TabActivity {
 				ordr.setCentral_id(cc);
 
 				switch (cc) {
-				case -1:
-					Toast.makeText(OrderActivity.this,
-							"Ошибка при работе с БД.", Toast.LENGTH_SHORT)
-							.show();
-					break;
-				case -2:
-					Toast.makeText(OrderActivity.this,
-							"Неверный XML. Обратитесь к администратору.",
-							Toast.LENGTH_SHORT).show();
-					break;
-
-				default:
-					od.SaveOrder(ordr);
-					try {
+					case -1:
 						Toast.makeText(OrderActivity.this,
-								"Заявка успешно отправлена.", Toast.LENGTH_SHORT)
+								"Ошибка при работе с БД.", Toast.LENGTH_SHORT)
 								.show();
-					}
-					catch (Exception e)
-					{
-						String s=e.getMessage();
-						s=e.getMessage();
-					}
+						break;
+					case -2:
+						Toast.makeText(OrderActivity.this,
+								"Неверный XML. Обратитесь к администратору.",
+								Toast.LENGTH_SHORT).show();
+						break;
+
+					default:
+						od.SaveOrder(ordr);
+						try {
+							Toast.makeText(OrderActivity.this,
+									"Заявка успешно отправлена.", Toast.LENGTH_SHORT)
+									.show();
+						}
+						catch (Exception e)
+						{
+							String s=e.getMessage();
+							s=e.getMessage();
+						}
 
 
 
-					finish();
-					break;
+						finish();
+						break;
 				}
 
 			} else {
@@ -505,30 +505,30 @@ public class OrderActivity extends TabActivity {
 
 		SimpleAdapter adapter = new SimpleAdapter(this, items,
 				R.layout.torder_item, new String[] { "tovid", "tovname",
-						"ed_izm", "kolvo", "cena" }, new int[] {
-						R.id.torder_tovid, R.id.torder_tovname,
-						R.id.torder_toved_izm, R.id.torder_tovkolvo,
-						R.id.torder_tovcena });
+				"ed_izm", "kolvo", "cena" }, new int[] {
+				R.id.torder_tovid, R.id.torder_tovname,
+				R.id.torder_toved_izm, R.id.torder_tovkolvo,
+				R.id.torder_tovcena });
 
 		lwTOrders.setAdapter(adapter);
-		
+
 		OnItemClickListener tovarlistener = new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int position, long id) {
+									int position, long id) {
 				// ((java.util.HashMap)arg0.getItemAtPosition(position)).get("kolvo");
 
 				// TODO Auto-generated method stub
-				 
+
 
 				try {
 					// lwTOrders.getSelectedItem()
 					String s = "ssss";
-					selectedtovar = new TOrder(0, ordr.getId(), 
-							Integer.valueOf(((java.util.HashMap) arg0.getItemAtPosition(position)).get("tovid").toString()), 
+					selectedtovar = new TOrder(0, ordr.getId(),
+							Integer.valueOf(((java.util.HashMap) arg0.getItemAtPosition(position)).get("tovid").toString()),
 							((java.util.HashMap) arg0
-							.getItemAtPosition(position)).get("tovname")
-							.toString(), ((java.util.HashMap) arg0
+									.getItemAtPosition(position)).get("tovname")
+									.toString(), ((java.util.HashMap) arg0
 							.getItemAtPosition(position)).get("ed_izm")
 							.toString(), Double
 							.valueOf(((java.util.HashMap) arg0
@@ -542,11 +542,11 @@ public class OrderActivity extends TabActivity {
 							Double.valueOf(((java.util.HashMap) arg0
 									.getItemAtPosition(position)).get("kolvo")
 									.toString()), Double
-									.valueOf(((java.util.HashMap) arg0
-											.getItemAtPosition(position)).get(
-											"cena").toString()),
+							.valueOf(((java.util.HashMap) arg0
+									.getItemAtPosition(position)).get(
+									"cena").toString()),
 							new OnReadyListener());
-					
+
 					myDialog.show();
 
 				} catch (Exception e) {
@@ -623,8 +623,8 @@ public class OrderActivity extends TabActivity {
 					ordr = od.getOrder(OrderId);
 					ordr.setIschanged(false);
 					if (sendaftersave)
-					   //	SendOrder();
-					new SendOrderTask();
+						//	SendOrder();
+						new SendOrderTask();
 					finish();
 					OrderActivity.this.onKeyDown(KeyEvent.KEYCODE_BACK,
 							new KeyEvent(KeyEvent.ACTION_DOWN,
@@ -652,7 +652,7 @@ public class OrderActivity extends TabActivity {
 			builder.setPositiveButton("Да",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,
-								int whichButton) {
+											int whichButton) {
 							if (ordr.getClient_id() == 0) {
 								AlertDialog.Builder builder2 = new AlertDialog.Builder(
 										OrderActivity.this);
@@ -682,7 +682,7 @@ public class OrderActivity extends TabActivity {
 			builder.setNegativeButton("Нет",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,
-								int whichButton) {
+											int whichButton) {
 							finish();
 						}
 					});
@@ -698,12 +698,12 @@ public class OrderActivity extends TabActivity {
 			/*
 			 * ConfirmDialog myDialog = new
 			 * ConfirmDialog(this,"Сохранить заявку?", new ReadyListener() {
-			 * 
+			 *
 			 * @Override public void ready(boolean yesno) {
-			 * 
+			 *
 			 * if (yesno) { Toast.makeText(OrderActivity.this,
 			 * String.valueOf(yesno), 30000).show(); }
-			 * 
+			 *
 			 * } }); myDialog.show();
 			 */
 
@@ -713,9 +713,9 @@ public class OrderActivity extends TabActivity {
 			}
 			/*
 			 * if (SaveClick()) {
-			 * 
+			 *
 			 * keyCode = KeyEvent.KEYCODE_BACK;
-			 * 
+			 *
 			 * } else { keyCode = KeyEvent.KEYCODE_0; }
 			 */
 		}
@@ -727,7 +727,7 @@ public class OrderActivity extends TabActivity {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-	//	Toast.makeText(OrderActivity.this, "stop", Toast.LENGTH_SHORT).show();
+		//	Toast.makeText(OrderActivity.this, "stop", Toast.LENGTH_SHORT).show();
 
 		Log.d("ttt", "OrderActivity onStop");
 	}
@@ -736,7 +736,7 @@ public class OrderActivity extends TabActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-	//	Toast.makeText(OrderActivity.this, "pause", Toast.LENGTH_SHORT).show();
+		//	Toast.makeText(OrderActivity.this, "pause", Toast.LENGTH_SHORT).show();
 
 		Log.d("ttt", "OrderActivity onPause");
 	}
@@ -755,7 +755,7 @@ public class OrderActivity extends TabActivity {
 
 
 		try {
-		//	requestWindowFeature(Window.FEATURE_NO_TITLE);
+			//	requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 			setContentView(R.layout.order);
 			super.onCreate(savedInstanceState);
@@ -781,10 +781,10 @@ public class OrderActivity extends TabActivity {
 
 				@Override
 				public void onTabChanged(String tabId) {
-				if (tabId=="tag1")
-				{
-					sTVZakazsumma.setText(ordr.getMainsumm().toString());
-				}
+					if (tabId=="tag1")
+					{
+						sTVZakazsumma.setText(ordr.getMainsumm().toString());
+					}
 
 				}
 			});
@@ -841,26 +841,26 @@ public class OrderActivity extends TabActivity {
 			Bundle extras = data.getExtras();
 			// extras.getString("_id")
 			switch (causedactivity) {
-			case 1:
-				zakazclient.setText(extras.getString("name").toString());
-				ordr.setClient_id(extras.getInt("_id"));
-				ordr.setClient_name(extras.getString("name"));
-				ordr.setIdskidka(extras.getInt("idskidka"));
+				case 1:
+					zakazclient.setText(extras.getString("name").toString());
+					ordr.setClient_id(extras.getInt("_id"));
+					ordr.setClient_name(extras.getString("name"));
+					ordr.setIdskidka(extras.getInt("idskidka"));
 
-				break;
-			case 2:
-				// lastgridtov = extras.getInt("lastgridtov");
-				ordr.addTovar(new TOrder(0, ordr.getId(), extras
-						.getInt("idtov"), extras.getString("name"), extras
-						.getString("ed_izm"), extras.getDouble("cena"), extras
-						.getDouble("kolvo")));
-				setData();
-				lasttov=extras.getInt("idtov");
-				
-				break;
+					break;
+				case 2:
+					// lastgridtov = extras.getInt("lastgridtov");
+					ordr.addTovar(new TOrder(0, ordr.getId(), extras
+							.getInt("idtov"), extras.getString("name"), extras
+							.getString("ed_izm"), extras.getDouble("cena"), extras
+							.getDouble("kolvo")));
+					setData();
+					lasttov=extras.getInt("idtov");
 
-			default:
-				break;
+					break;
+
+				default:
+					break;
 			}
 
 		}
