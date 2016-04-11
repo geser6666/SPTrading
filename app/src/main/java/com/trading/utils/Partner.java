@@ -6,11 +6,12 @@ public class Partner {
 
 
 	public int id;
-	public Partner(int id, String name, String address, String phone,
+	public Partner(int id, String name, String name_l, String address, String phone,
 			int daysdelay, Double debtsumm1, int idskidka, String category, String idhenkel, int week_day) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.name_l = name_l;
 		this.address = address;
 		this.phone = phone;
 		this.daysdelay = daysdelay;
@@ -23,6 +24,7 @@ public class Partner {
 	}
 
 	public String name;
+	public String name_l;
 	public String  address;
 	public String phone; 
 	public int  daysdelay;

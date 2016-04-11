@@ -12,6 +12,7 @@ import com.trading.utils.Tovar;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 
 public class TovarsDao {
 	private DB dba;
@@ -94,8 +95,9 @@ public class TovarsDao {
 					null, "_id=" + String.valueOf(lid), null, null, null, null);
 			curTovar.moveToFirst();
 			        ret = new Tovar(curTovar.getInt(curTovar.getColumnIndex("_id")), 
-            curTovar.getString(curTovar.getColumnIndex("name")), 
-            curTovar.getString(curTovar.getColumnIndex("ed_izm")), 
+            curTovar.getString(curTovar.getColumnIndex("name")),
+							curTovar.getString(curTovar.getColumnIndex("name_l")),
+							curTovar.getString(curTovar.getColumnIndex("ed_izm")),
             curTovar.getDouble(curTovar.getColumnIndex("cenands")), 
             curTovar.getDouble(curTovar.getColumnIndex("available")), 
             curTovar.getDouble(curTovar.getColumnIndex("ost")), 
@@ -135,7 +137,32 @@ public class TovarsDao {
 		
 		return c;
 	}
+	public Cursor getTovars(String searchString,int typeview) {
+		String filter="";
+		switch (typeview) {
+			case 1:
+				filter="name_l like '%"+searchString+"%' and available>0";
+				break;
+			case 2:
+				filter="name_l like '%"+searchString+"%' and ost>0";
+				break;
+			case 3:
+				filter="name_l like '%"+searchString+"%' and (available>0)";
+				break;
+			default:
+				filter="name_l like '%"+searchString+"%'";
+				break;
+		}
+		Cursor c = DB.getDB(context).query(Const.TABLE_SKLAD, null,
+				filter,
+				null,//new String[]{searchString},
+				null, null, "name");
+		// Cursor c = dba.getDB(context).query(Const.TABLE_PROPS, null, null,
+		// null, null, null, null);
+		// c.deactivate();
 
+		return c;
+	}
 	
 	public void setInsertUpdateGroups(ArrayList<Grsklad> grouplist) {
 		Grsklad p;
@@ -156,22 +183,34 @@ public class TovarsDao {
 
 	}
 
-	public void setInsertUpdateTovars(ArrayList<Tovar> tovarlist) {
+	public int setInsertUpdateTovars(ArrayList<Tovar> tovarlist) {
 		Tovar p;
 
+		int err=0;
 		for (int i = 0; i < tovarlist.size(); i++) {
 			p = tovarlist.get(i);
 			if (DB.isExist(p.getId(), Const.TABLE_SKLAD)) {
-				DB.getDB(context).execSQL("update sklad set name=?,ed_izm=?,cenands=?,available=?,ost=?,parentid=?, skidka1=?,skidka2=?,skidka3=?, seb=? where _id=?",
-						new Object[] { p.getName(),p.getEd_izm(), p.getCenands(),p.getAvailable(),p.getKolvo(),p.getParentid(),p.getSkidka1(),p.getSkidka2(),p.getSkidka3(), p.getSeb(), p.getId()});
+				try {
+					DB.getDB(context).execSQL("update sklad set name=?,name_l=?,ed_izm=?,cenands=?,available=?,ost=?,parentid=?, skidka1=?,skidka2=?,skidka3=?, seb=? where _id=?",
+                            new Object[] { p.getName(),p.getName_l(),p.getEd_izm(), p.getCenands(),p.getAvailable(),p.getKolvo(),p.getParentid(),p.getSkidka1(),p.getSkidka2(),p.getSkidka3(), p.getSeb(), p.getId()});
+				} catch (SQLException e) {
+					err++;
+					e.printStackTrace();
+				}
 			} else {
-				DB.getDB(context).execSQL(
-						"insert into sklad(_id,name,ed_izm,cenands,available,ost,parentid, skidka1,skidka2,skidka3, seb) values(?,?,?,?,?,?,?,?,?,?,?)",
-						new Object[] { p.getId(), p.getName(),p.getEd_izm(), p.getCenands(),p.getAvailable(),p.getKolvo(),p.getParentid(),p.getSkidka1(),p.getSkidka2(),p.getSkidka3(), p.getSeb() });
+				try {
+					DB.getDB(context).execSQL(
+                            "insert into sklad(_id,name,name_l,ed_izm,cenands,available,ost,parentid, skidka1,skidka2,skidka3, seb) values(?,?,?,?,?,?,?,?,?,?,?,?)",
+                            new Object[] { p.getId(), p.getName(),p.getName_l(),p.getEd_izm(), p.getCenands(),p.getAvailable(),p.getKolvo(),p.getParentid(),p.getSkidka1(),p.getSkidka2(),p.getSkidka3(), p.getSeb() });
+				} catch (SQLException e) {
+					err++;
+					e.printStackTrace();
+				}
 			}
 
 		}
 		dba.close();
+		return err;
 	}
 	public Cursor getGroups() {
 		Cursor c = DB.getDB(context).query(Const.TABLE_GRSKLAD, new String[]{"_id","name"}, null,

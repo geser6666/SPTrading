@@ -4,6 +4,7 @@ public class Tovar {
 private int id;
 
 private String name;
+private String name_l;
 private String ed_izm;
 private Double cenands;
 private Double available;
@@ -41,10 +42,11 @@ public void setKolvo(Double kolvo) {
 public Tovar()
 {
 }
-public Tovar(int id, String name, String edIzm, Double cenands, Double available, Double kolvo, Integer parentid, Double skidka1, Double skidka2, Double skidka3, Double seb) {
+public Tovar(int id, String name, String name_l, String edIzm, Double cenands, Double available, Double kolvo, Integer parentid, Double skidka1, Double skidka2, Double skidka3, Double seb) {
   super();
   this.id = id;
   this.name = name;
+  this.name_l = name_l;
   this.ed_izm = edIzm;
   this.cenands = cenands;
   this.available = available;
@@ -62,9 +64,12 @@ public int getId() {
 public void setId(int id) {
   this.id = id;
 }
-public String getName() {
-  return name;
+public String getName_l() {
+  return name_l;
 }
+  public String getName() {
+    return name;
+  }
 public void setName(String name) {
   this.name = name;
 }

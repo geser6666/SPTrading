@@ -29,7 +29,9 @@ import android.os.Bundle;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.SearchEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -78,23 +80,35 @@ public class OrderActivity extends TabActivity {
 	private String searchQuery="";
 
 	private void handleIntent(Intent intent) {
-		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			searchQuery = intent.getStringExtra(SearchManager.QUERY);
-			intent.setAction(Intent.ACTION_VIEW);
-			Intent newintent = new Intent();
-			intent.putExtra("searchQuery", searchQuery);
-			intent.setClass(OrderActivity.this, TovarsListActivity.class);
-			causedactivity = 2;
-			startActivityForResult(intent, 0);
-			//ApplyAdapter(tb_mar.isChecked(),0);
-		}
-		searchQuery = "";
+		Log.d("ttt", "HandleIntent");
+//		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//			searchQuery = intent.getStringExtra(SearchManager.QUERY);
+//
+//		//	Intent newintent = new Intent();
+//			intent.putExtra("searchQuery", searchQuery);
+//			intent.setClass(OrderActivity.this, TovarsListActivity.class);
+//			causedactivity = 2;
+//			startActivityForResult(intent, 0);
+//			intent.setAction(Intent.ACTION_VIEW);
+//			//ApplyAdapter(tb_mar.isChecked(),0);
+//		}
+//		searchQuery = "";
 
 	}
 	@Override
-	protected void onNewIntent(Intent intent) {
-		setIntent(intent);
-		handleIntent(intent);
+	protected void onNewIntent(Intent intentt) {
+		Log.d("ttt", "OrderActivity onNewIntent");
+//		setIntent(getIntent());
+//
+//		searchQuery = intentt.getStringExtra(SearchManager.QUERY);
+//		getIntent().putExtra("searchQuery", 	searchQuery);
+//		getIntent().setClass(OrderActivity.this, TovarsListActivity.class);
+//		causedactivity = 2;
+//		startActivityForResult(getIntent(), 0);
+//
+
+
+	//	handleIntent(intent);
 	}
 	private class OnReadyListener implements KolvoDialog.ReadyListener {
 		@Override
@@ -237,7 +251,7 @@ public class OrderActivity extends TabActivity {
 		ibOrderSearchBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				onSearchRequested();
+		//		onSearchRequested();
 				//Toast.makeText(OrderActivity.this,"Нажат поиск",Toast.LENGTH_LONG).show();
 			}
 		});
@@ -715,6 +729,7 @@ public class OrderActivity extends TabActivity {
 		super.onStop();
 	//	Toast.makeText(OrderActivity.this, "stop", Toast.LENGTH_SHORT).show();
 
+		Log.d("ttt", "OrderActivity onStop");
 	}
 
 	@Override
@@ -722,16 +737,31 @@ public class OrderActivity extends TabActivity {
 		// TODO Auto-generated method stub
 		super.onPause();
 	//	Toast.makeText(OrderActivity.this, "pause", Toast.LENGTH_SHORT).show();
+
+		Log.d("ttt", "OrderActivity onPause");
 	}
+
+
+//	@Override
+//	public boolean onSearchRequested() {
+//	//	Toast.makeText(this,"SearchRequested", Toast.LENGTH_SHORT).show();
+//		Log.d("ttt", "OrderActivity onSearchRequest");
+//		return super.onSearchRequested();
+//	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
+
+
 		try {
 		//	requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 			setContentView(R.layout.order);
-			handleIntent(getIntent());
+			super.onCreate(savedInstanceState);
+			//handleIntent(getIntent());
+			Log.d("ttt", "OrderActivity onCreate");
+
 			Bundle extras = getIntent().getExtras();
 			OrderId = extras.getInt("_ID");
 			typedoc = extras.getInt("typedoc");
@@ -806,7 +836,7 @@ public class OrderActivity extends TabActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-
+		Log.d("ttt", "OrderActivity onActivityResult result="+String.valueOf(resultCode));
 		if (resultCode == RESULT_OK) {
 			Bundle extras = data.getExtras();
 			// extras.getString("_id")
@@ -841,8 +871,9 @@ public class OrderActivity extends TabActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		 
-		  
+		Log.d("ttt", "OrderActivity onResume");
+
+
 	}
 
 }

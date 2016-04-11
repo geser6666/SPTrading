@@ -163,10 +163,10 @@ public class TovarsListActivity extends ListActivity implements
 			if (extras.get("searchQuery") != null)
 			{
 				myAdapter = new TovarsAdapter(this, extras.getInt("lastgridtov"),
-						idskidka,typeview, tbTovOnlyOst.isChecked());
+						idskidka,typeview, tbTovOnlyOst.isChecked(),extras.get("searchQuery").toString());
 			}else
 				myAdapter = new TovarsAdapter(this, extras.getInt("lastgridtov"),
-					idskidka,typeview, tbTovOnlyOst.isChecked());
+					idskidka,typeview, tbTovOnlyOst.isChecked(),"");
 			this.setListAdapter(myAdapter);
 			
 			if (extras != null) 
@@ -278,7 +278,7 @@ public class TovarsListActivity extends ListActivity implements
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
-		myAdapter = new TovarsAdapter(this, ((SpinnerDB) grtovar.getSelectedItem()).id,idskidka, typeview, tbTovOnlyOst.isChecked());
+		myAdapter = new TovarsAdapter(this, ((SpinnerDB) grtovar.getSelectedItem()).id,idskidka, typeview, tbTovOnlyOst.isChecked(),"");
 		this.setListAdapter(myAdapter);
 	}
 

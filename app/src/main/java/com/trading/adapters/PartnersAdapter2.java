@@ -98,6 +98,7 @@ public class PartnersAdapter2 extends ArrayAdapter<Partner> {
 			do {
 				int id=c.getInt(c.getColumnIndex(Const.TABLE_PARTNERS_ID));
 				String name=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_NAME));
+				String name_l=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_NAME_L));
 				String address=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_ADDRESS));
 				String phone=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_PHONE));
 				int daysdelay=c.getInt(c.getColumnIndex(Const.TABLE_PARTNERS_DAYSDELAY));
@@ -106,7 +107,7 @@ public class PartnersAdapter2 extends ArrayAdapter<Partner> {
 				String category=c.getString(c.getColumnIndex("cat"));
 				String idhenkel=c.getString(c.getColumnIndex("idhenkel"));
 				int week_day=c.getInt(c.getColumnIndex("week_day"));
-				 Partner temp = new Partner(id, name, address, phone, daysdelay, debtsumm1, idskidka, category,idhenkel, week_day);
+				 Partner temp = new Partner(id, name,name_l, address, phone, daysdelay, debtsumm1, idskidka, category,idhenkel, week_day);
 				 ret.add(temp);
 			} while (c.moveToNext());
 

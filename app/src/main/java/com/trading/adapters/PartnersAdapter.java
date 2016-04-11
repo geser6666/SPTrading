@@ -22,6 +22,7 @@ public class PartnersAdapter extends BaseAdapter {
 	private PartnersDao pd;
 	public int id;
 	public String name;
+	public String name_l;
 	public String address;
 	public String phone;
 	public int daysdelay;
@@ -56,6 +57,7 @@ public class PartnersAdapter extends BaseAdapter {
 			do {
 				id=c.getInt(c.getColumnIndex(Const.TABLE_PARTNERS_ID));
 				name=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_NAME));
+				name_l=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_NAME_L));
 				address=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_ADDRESS));
 				String phone=c.getString(c.getColumnIndex(Const.TABLE_PARTNERS_PHONE));
 				daysdelay=c.getInt(c.getColumnIndex(Const.TABLE_PARTNERS_DAYSDELAY));
@@ -65,7 +67,7 @@ public class PartnersAdapter extends BaseAdapter {
 				idhenkel=c.getString(c.getColumnIndex("idhenkel"));
 				week_day=c.getInt(c.getColumnIndex("week_day"));
 				
-				 Partner temp = new Partner(id, name, address, phone, daysdelay, debtsumm1, idskidka, category, idhenkel,week_day);
+				 Partner temp = new Partner(id, name,name_l, address, phone, daysdelay, debtsumm1, idskidka, category, idhenkel,week_day);
 				 partners.add(temp);
 			} while (c.moveToNext());
 
@@ -115,7 +117,7 @@ try {
 		holder.mPartnerCat.setText(holder.mPartners.category.toString());
 		
 } catch (Exception e) {
-Toast.makeText(null, e.getMessage(), 10000);
+Toast.makeText(null, e.getMessage(), 10000).show();
 // TODO: handle exception
 }
 

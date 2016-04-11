@@ -43,6 +43,7 @@ public class Const {
 	//поля таблицы PARTNERS
 	public static final String TABLE_PARTNERS_ID 		=	"_id";
 	public static final String TABLE_PARTNERS_NAME		=	"name";
+	public static final String TABLE_PARTNERS_NAME_L	=	"name_l";
 	public static final String TABLE_PARTNERS_ADDRESS	=	"address";
 	public static final String TABLE_PARTNERS_PHONE		=	"phone";
 	public static final String TABLE_PARTNERS_DAYSDELAY	=	"daysdelay";

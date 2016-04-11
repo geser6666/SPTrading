@@ -1,6 +1,7 @@
 package com.trading.db;
 
 
+import com.trading.R;
 import com.trading.utils.Const;
 
 import android.app.Application;
@@ -27,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static  String DB_FOLDER = "/data/data/com.trading/databases/";
 	private static  String DB_PATH = DB_FOLDER + DB_NAME;
 	private static  String DB_ASSETS_PATH = "db/" + DB_NAME;
-	private static  int DB_VERSION = 3;
+	private static  int DB_VERSION =3 ;
 	private static  int DB_FILES_COPY_BUFFER_SIZE = 8192;
 
 	public static void Initialize() {
@@ -142,8 +143,27 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int old_version, int new_version) {
 		Log.d("onUpgradeDB",String.format("New version: %d, Old version: %d", new_version, old_version));
-		throw new SQLiteException(
-				"Call OlimpicRaceSQLhelper.Initialize first. This method should never be called.");
+
+		for (int i=old_version+1;i<=new_version;i++)
+		{
+
+			String[] ddl = mContext.getResources().getStringArray(
+					mContext.getResources().getIdentifier("ver_"+String.valueOf(i),"array",mContext.getPackageName())
+			);
+			for (String ddl_txt: ddl)
+			{
+				try {
+					db.execSQL(ddl_txt);
+				} catch (Exception e) {
+					String xx;
+					xx=e.getMessage();
+					// TODO: handle exception
+				}
+
+			}
+		}
+
+		//throw new SQLiteException("Call OlimpicRaceSQLhelper.Initialize first. This method should never be called.");
 
 			/*if (old_version != new_version) {
 			db.execSQL("DROP TABLE IF EXISTS " + Const.TABLE_PARAMS);

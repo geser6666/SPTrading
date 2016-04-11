@@ -10,6 +10,7 @@ import com.trading.dao.OrdersDao;
 import com.trading.dao.ParamsDao;
 import com.trading.dao.PartnersDao;
 import com.trading.dao.TovarsDao;
+import com.trading.db.DB;
 import com.trading.transfer.DBInteraction;
 import com.trading.utils.CC_card;
 import com.trading.utils.ClientCard;
@@ -69,6 +70,20 @@ public class SyncActivity extends ListActivity {
 
 		switch (position) {
 			case SYNCMENU_ALL:
+				String[] ddl = this.getResources().getStringArray(
+						this.getResources().getIdentifier("ver_4","array",this.getPackageName())
+				);
+				for (String ddl_txt: ddl)
+				{
+					try {
+						DB.getDB(this).execSQL(ddl_txt);
+					} catch (Exception e) {
+						String xx;
+						xx=e.getMessage();
+						// TODO: handle exception
+					}
+
+				}
 
 				break;
 
@@ -80,7 +95,7 @@ public class SyncActivity extends ListActivity {
 			} catch (Exception e) {
 				// TODO: handle exception
 				Toast.makeText(SyncActivity.this, "неудача" + e.getMessage(),
-						10000).show();
+						Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -93,7 +108,7 @@ public class SyncActivity extends ListActivity {
 			} catch (Exception e) {
 				// TODO: handle exception
 				Toast.makeText(SyncActivity.this, "неудача" + e.getMessage(),
-						10000).show();
+						Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -103,7 +118,7 @@ public class SyncActivity extends ListActivity {
 
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000);
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 			break;
 
@@ -113,7 +128,7 @@ public class SyncActivity extends ListActivity {
 
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000);
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -124,7 +139,7 @@ public class SyncActivity extends ListActivity {
 
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000);
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -157,9 +172,10 @@ public class SyncActivity extends ListActivity {
 					pd.clearPartnersWeekDay();
 					showProgressMsg("Добавление партнеров в базу...");
 
+					int err=
 					pd.setInsertUpdatePartners(ar);
 					showMsg("Обработано:" + String.valueOf(ar.size())
-							+ " партнеров.");
+							+ " партнеров. Пропущено: "+String.valueOf(err));
 					handler.sendEmptyMessage(0); // посылаем уведомление об
 													// окончании загрузки
 				} catch (IOException e) {
@@ -197,11 +213,12 @@ public class SyncActivity extends ListActivity {
 					art = dbitem.GetTovari();
 					showProgressMsg("Добавление товаров...");
 					td = new TovarsDao(SyncActivity.this);
+					int err=
 					td.setInsertUpdateTovars(art);
 
 					showMsg("Обработано:" + String.valueOf(ar.size())
 							+ "групп и " + String.valueOf(art.size())
-							+ "товаров.");
+							+ "товаров. Пропущено "+String.valueOf(err)+" товаров.");
 					handler.sendEmptyMessage(0); // посылаем уведомление об
 
 				} catch (Exception e) {

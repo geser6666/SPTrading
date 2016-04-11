@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ver_4">
+        <item>alter table sklad add column name_l varchar(100);</item>
+        <item>CREATE INDEX idx_sklad_name_l ON sklad (name_l COLLATE NOCASE);</item>
+        <item>alter table partner add column name_l varchar(100);</item>
+        <item>CREATE INDEX idx_partner_name_l ON partner (name_l COLLATE NOCASE);</item>
+    </string-array>
+</resources>

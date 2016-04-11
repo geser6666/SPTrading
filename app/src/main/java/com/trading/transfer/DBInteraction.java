@@ -194,6 +194,17 @@ public class DBInteraction {
 					if (textNodes.getLength() > 0)
 						name = textNodes.item(0).getNodeValue()
 								.toString();
+					// name_l
+					NodeList name_lNodes = (parElement)
+							.getElementsByTagName("name_l");
+					Element name_lElement = (Element) name_lNodes.item(0);
+					// ---get all the child nodes under the <title> element---
+					textNodes = name_lElement.getChildNodes();
+					// ---retrieve the text of the <name> element---
+					String name_l = "";
+					if (textNodes.getLength() > 0)
+						name_l = textNodes.item(0).getNodeValue()
+								.toString();
 
 					// address
 					NodeList addressNodes = (parElement)
@@ -256,7 +267,7 @@ public class DBInteraction {
 					
 					
 					// arr.add(new Partner(id, name, address, phone, 0, 0.0,2));
-						arr.add(new Partner(id, name, address, phone, 0,
+						arr.add(new Partner(id, name,name_l, address, phone, 0,
 										0.0, 0, cat, idhenkel, week_day));
 				}
 
@@ -325,6 +336,15 @@ public class DBInteraction {
 						name = textNodes.item(0).getNodeValue()
 								.toString();
 
+					// name_l
+					NodeList name_lNodes = (tovarElement)
+							.getElementsByTagName("name_l");
+					Element name_lElement = (Element) name_lNodes.item(0);
+					textNodes = name_lElement.getChildNodes();
+					String name_l = "";
+					if (textNodes.getLength() > 0)
+						name_l = textNodes.item(0).getNodeValue()
+								.toString();
 					// ed_izm
 					NodeList ed_izmNodes = (tovarElement)
 							.getElementsByTagName("ed_izm");
@@ -401,7 +421,7 @@ public class DBInteraction {
 						skidka2 = Double.valueOf(textNodes.item(0)
 								.getNodeValue());					
 
-					arr.add(new Tovar(id, name, ed_izm, cena, dost, faktost,
+					arr.add(new Tovar(id, name,name_l, ed_izm, cena, dost, faktost,
 							parentnid, skidka1 , skidka2 , cena,  seb));
 				}
 

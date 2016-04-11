@@ -26,8 +26,10 @@ public class TovarsAdapter extends BaseAdapter {
     private int idgr;
     private int idskidka=-1;
 	public int id;
+	private String searchStr="";
 
 	public String name;
+	public String name_l;
 	public String ed_izm;
 	public Double cenands;
 	public Double available;
@@ -56,12 +58,13 @@ public class TovarsAdapter extends BaseAdapter {
 		getdata(0);
 	}
 	*/
-	public TovarsAdapter(Context context, long idgr, int idskidka, int typeview, boolean onlyost) {
+	public TovarsAdapter(Context context, long idgr, int idskidka, int typeview, boolean onlyost, String searchQuery) {
 		td = new TovarsDao(context);
 		this.idgr=(int)idgr;
 		this.onlyost=onlyost;
 		this.typeview=typeview;
 		this.idskidka=idskidka;
+		this.searchStr=searchQuery;
 		mInflater = LayoutInflater.from(context);
 		tovars = new ArrayList<Tovar>();
 		getdata(idskidka);
@@ -73,12 +76,19 @@ public class TovarsAdapter extends BaseAdapter {
 		 typv=0;	 
 		 else
 			 typv=this.typeview;
-		Cursor c = td.getTovars(this.idgr, typv);
+		Cursor c;
+		if (searchStr.equals("")){
+		c= td.getTovars(this.idgr, typv);
+		}
+		else{
+			c = td.getTovars(searchStr, typv);
+		}
 		// startManagingCursor(c);
 		if (c.moveToFirst()) {
 			do {
 				id = c.getInt(c.getColumnIndex("_id"));
 				name = c.getString(c.getColumnIndex("name"));
+				name_l = c.getString(c.getColumnIndex("name_l"));
 				ed_izm = c.getString(c.getColumnIndex("ed_izm"));
 				cenands = c.getDouble(c.getColumnIndex("cenands"));
 				available = c.getDouble(c.getColumnIndex("available"));
@@ -90,7 +100,8 @@ public class TovarsAdapter extends BaseAdapter {
 				seb = c.getDouble(c.getColumnIndex("seb"));
 				
 				Tovar temp = new Tovar(c.getInt(c.getColumnIndex("_id")), 
-						c.getString(c.getColumnIndex("name")), 
+						c.getString(c.getColumnIndex("name")),
+						c.getString(c.getColumnIndex("name_l")),
 						c.getString(c.getColumnIndex("ed_izm")), 
 						c.getDouble(c.getColumnIndex("cenands")), 
 						c.getDouble(c.getColumnIndex("available")), 
@@ -106,18 +117,26 @@ public class TovarsAdapter extends BaseAdapter {
 		}
 
 	}
+	//public Cursor getTovars()
 	public void getdata( int idskidka) {
 		int typv;
 		if (this.onlyost) 
 			 typv=0;	 
 			 else
 				 typv=this.typeview;
-		Cursor c = td.getTovars(this.idgr, typv);
+        Cursor c;
+        if (searchStr.equals("")){
+            c= td.getTovars(this.idgr, typv);
+        }
+        else{
+            c = td.getTovars(searchStr, typv);
+        }
 		// startManagingCursor(c);
 		if (c.moveToFirst()) {
 			do {
 				id = c.getInt(c.getColumnIndex("_id"));
 				name = c.getString(c.getColumnIndex("name"));
+				name_l= c.getString(c.getColumnIndex("name_l"));
 				ed_izm = c.getString(c.getColumnIndex("ed_izm"));
 				switch (idskidka) {
 				case 1:
@@ -138,9 +157,10 @@ public class TovarsAdapter extends BaseAdapter {
 				available = c.getDouble(c.getColumnIndex("available"));
 				kolvo = c.getDouble(c.getColumnIndex("ost"));
 				parentid = c.getInt(c.getColumnIndex("parentid"));
-				Tovar temp = new Tovar(c.getInt(c.getColumnIndex("_id")), c
-						.getString(c.getColumnIndex("name")), c.getString(c
-						.getColumnIndex("ed_izm")), 
+				Tovar temp = new Tovar(c.getInt(c.getColumnIndex("_id")),
+						c.getString(c.getColumnIndex("name")),
+						c.getString(c.getColumnIndex("name_l")),
+						c.getString(c.getColumnIndex("ed_izm")),
 						//c.getDouble(c.getColumnIndex("cenands")),
 						cenands,
 						c.getDouble(c
@@ -177,18 +197,21 @@ public class TovarsAdapter extends BaseAdapter {
 private void SetHolderVisibility(ViewHolder holder)
 {
 	switch (typeview) {
+		//показывается остаток по главному складу
 	case 1:
 		holder.mTovarOstName.setVisibility(View.INVISIBLE);
 		holder.mTovarOst.setVisibility(View.INVISIBLE);
 		holder.mTovarAvailableName.setVisibility(View.VISIBLE);
 		holder.mTovarAvailable.setVisibility(View.VISIBLE);
 		break;
+		//показывается остаток по личному складу
 	case 2:
 		holder.mTovarOstName.setVisibility(View.VISIBLE);
 		holder.mTovarOst.setVisibility(View.VISIBLE);
 		holder.mTovarAvailableName.setVisibility(View.INVISIBLE);
 		holder.mTovarAvailable.setVisibility(View.INVISIBLE);
 		break;
+		//показывается остаток по личному складу и по главному складу
 	case 3:
 		holder.mTovarOstName.setVisibility(View.VISIBLE);
 		holder.mTovarOst.setVisibility(View.VISIBLE);
