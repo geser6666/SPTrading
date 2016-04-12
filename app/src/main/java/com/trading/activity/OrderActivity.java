@@ -81,34 +81,35 @@ public class OrderActivity extends TabActivity {
 
 	private void handleIntent(Intent intent) {
 		Log.d("ttt", "HandleIntent");
-//		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//			searchQuery = intent.getStringExtra(SearchManager.QUERY);
-//
-//		//	Intent newintent = new Intent();
-//			intent.putExtra("searchQuery", searchQuery);
-//			intent.setClass(OrderActivity.this, TovarsListActivity.class);
-//			causedactivity = 2;
-//			startActivityForResult(intent, 0);
-//			intent.setAction(Intent.ACTION_VIEW);
-//			//ApplyAdapter(tb_mar.isChecked(),0);
-//		}
-//		searchQuery = "";
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			searchQuery = intent.getStringExtra(SearchManager.QUERY);
+
+			Intent newintent = new Intent();
+			newintent.putExtra("searchQuery", searchQuery);
+			newintent.setClass(OrderActivity.this, TovarsListActivity.class);
+			causedactivity = 2;
+			startActivityForResult(newintent, 0);
+			intent.setAction(Intent.ACTION_VIEW);
+			//ApplyAdapter(tb_mar.isChecked(),0);
+		}
+		searchQuery = "";
 
 	}
 	@Override
 	protected void onNewIntent(Intent intentt) {
 		Log.d("ttt", "OrderActivity onNewIntent");
-//		setIntent(getIntent());
+		setIntent(intentt);
 //
 //		searchQuery = intentt.getStringExtra(SearchManager.QUERY);
-//		getIntent().putExtra("searchQuery", 	searchQuery);
-//		getIntent().setClass(OrderActivity.this, TovarsListActivity.class);
+//		Intent intent=new Intent();
+//		intent.putExtra("searchQuery", searchQuery);
+//		intent.setClass(OrderActivity.this, TovarsListActivity.class);
 //		causedactivity = 2;
-//		startActivityForResult(getIntent(), 0);
-//
+//		startActivityForResult(intent, 0);
 
 
-		//	handleIntent(intent);
+
+			handleIntent(intentt);
 	}
 	private class OnReadyListener implements KolvoDialog.ReadyListener {
 		@Override
@@ -251,7 +252,7 @@ public class OrderActivity extends TabActivity {
 		ibOrderSearchBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				//		onSearchRequested();
+						onSearchRequested();
 				//Toast.makeText(OrderActivity.this,"Нажат поиск",Toast.LENGTH_LONG).show();
 			}
 		});
@@ -742,12 +743,12 @@ public class OrderActivity extends TabActivity {
 	}
 
 
-//	@Override
-//	public boolean onSearchRequested() {
-//	//	Toast.makeText(this,"SearchRequested", Toast.LENGTH_SHORT).show();
-//		Log.d("ttt", "OrderActivity onSearchRequest");
-//		return super.onSearchRequested();
-//	}
+	@Override
+	public boolean onSearchRequested() {
+	//	Toast.makeText(this,"SearchRequested", Toast.LENGTH_SHORT).show();
+		Log.d("ttt", "OrderActivity onSearchRequest");
+		return super.onSearchRequested();
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -756,6 +757,7 @@ public class OrderActivity extends TabActivity {
 
 		try {
 			//	requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 
 			setContentView(R.layout.order);
 			super.onCreate(savedInstanceState);
@@ -836,7 +838,7 @@ public class OrderActivity extends TabActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.d("ttt", "OrderActivity onActivityResult result="+String.valueOf(resultCode));
+		Log.d("ttt", "OrderActivity onActivityResult result=" + String.valueOf(resultCode));
 		if (resultCode == RESULT_OK) {
 			Bundle extras = data.getExtras();
 			// extras.getString("_id")

@@ -269,7 +269,7 @@ public class TovarsListActivity extends ListActivity implements
 
 		} catch (Exception e) {
 			String s = e.getMessage();
-			Toast.makeText(TovarsListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+			//Toast.makeText(TovarsListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		}
 		
 
