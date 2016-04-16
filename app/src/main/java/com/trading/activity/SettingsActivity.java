@@ -6,6 +6,7 @@ import com.trading.R;
 import com.trading.dao.ParamsDao;
 import com.trading.db.DB;
 import com.trading.transfer.DBInteraction;
+import com.trading.utils.ConfirmDialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,6 +14,7 @@ import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -86,7 +88,7 @@ public class SettingsActivity extends ListActivity{
 				
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -250,35 +252,22 @@ public class SettingsActivity extends ListActivity{
 					db.close(); 
 				} catch (Exception e) {
 					// TODO: handle exception
-					Toast.makeText(this, e.getMessage(), 10000).show();
+					Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 				} finally {
 
 				}
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
+			break;
+			case 2:
+			try {
+				Toast.makeText(this, "Программа SPTrading. Версия "+getPackageManager().getPackageInfo(getApplication().getPackageName(), 0).versionName,Toast.LENGTH_LONG).show();
+			} catch (PackageManager.NameNotFoundException e) {
+				e.printStackTrace();
+			}
 			break;
 		}		
 		

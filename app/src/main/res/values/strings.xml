@@ -24,6 +24,8 @@
 	<string-array name="itemSettings">
 		<item>Настройка сервера</item>
 		<item>Выбор сервера</item>
+		<item>О программе</item>
+
 	</string-array>
 	
 	

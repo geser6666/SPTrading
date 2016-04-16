@@ -17,6 +17,7 @@ import com.trading.services.GPSService;
 import com.trading.transfer.DBInteraction;
 import com.trading.utils.ManagerDialog;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 
@@ -28,6 +29,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -151,6 +153,7 @@ public class MainActivity extends ListActivity {
 						.setCancelable(false)
 						.setPositiveButton("Обновить",
 								new DialogInterface.OnClickListener(){
+									@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 									public void onClick(DialogInterface dialog, int id){
 										File file = new File(Environment.getExternalStorageDirectory().getPath() + "/Download/" + "SPTrading.apk");
 										file.delete();
@@ -164,6 +167,7 @@ public class MainActivity extends ListActivity {
 
 										intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
 										startActivity(intent);
+										MainActivity.this.finish();
 
 									}
 								});
@@ -285,7 +289,7 @@ public class MainActivity extends ListActivity {
 				startActivity(intent);
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -301,7 +305,7 @@ public class MainActivity extends ListActivity {
 				startActivity(intent);
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -317,7 +321,7 @@ public class MainActivity extends ListActivity {
 				startActivity(intent);
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -326,7 +330,7 @@ public class MainActivity extends ListActivity {
 				startActivity(new Intent(this, ClientCardMenuActivity.class));
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -336,7 +340,7 @@ public class MainActivity extends ListActivity {
 				startActivity(new Intent(this, ReferenceListActivity.class));
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -346,7 +350,7 @@ public class MainActivity extends ListActivity {
 				startActivity(new Intent(this, OrdersListActivity.class));
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -356,7 +360,7 @@ public class MainActivity extends ListActivity {
 				startActivity(new Intent(this, SyncActivity.class));
 			} catch (Exception e) {
 				// TODO: handle exception
-				Toast.makeText(this, e.getMessage(), 10000).show();
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 
 			break;
