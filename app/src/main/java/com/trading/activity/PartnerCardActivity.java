@@ -4,10 +4,18 @@ import android.app.Activity;
 
 import android.app.ListActivity;
 import android.app.TabActivity;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trading.R;
 import com.trading.dao.PartnersDao;
@@ -23,6 +31,7 @@ public class PartnerCardActivity extends Activity {
 
     Partner partner;
     PartnersDao pd=new PartnersDao(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +54,21 @@ public class PartnerCardActivity extends Activity {
         tvPartnerName.setText(partner.name);
         tvPartnerAddress.setText(partner.address);
         tvPartnerPhone.setText(partner.phone);
+        tvPartnerPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:"+tvPartnerPhone.getText().toString()));
+                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(callIntent);
+            }
+        });
     }
+
+
+
+
 /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
