@@ -14,6 +14,7 @@ import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class PartnerCardActivity extends Activity {
     private TextView tvPartnerName;
     private TextView tvPartnerAddress;
     private TextView tvPartnerPhone;
+    private ImageButton pc_ib_call;
 
     Partner partner;
     PartnersDao pd=new PartnersDao(this);
@@ -54,7 +56,9 @@ public class PartnerCardActivity extends Activity {
         tvPartnerName.setText(partner.name);
         tvPartnerAddress.setText(partner.address);
         tvPartnerPhone.setText(partner.phone);
-        tvPartnerPhone.setOnClickListener(new View.OnClickListener() {
+        pc_ib_call=(ImageButton)findViewById(R.id.pc_ib_call);
+
+        pc_ib_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
